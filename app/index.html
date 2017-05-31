@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Network Config Tool</title>
+		<meta name="description" content="Networking Best Pratice Config Tool">
+		<meta name="author" content="Nicholas Moorman">
+
+		<!--Styles-->
+		<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<!--<link href="dist/css/main.css" rel="stylesheet">-->
+
+		<!--Scripts-->
+		<SCRIPT> window.jQuery = window.$ = require('jquery');</SCRIPT>
+		<SCRIPT TYPE="text/javascript" SRC="../node_modules/bootstrap/dist/js/bootstrap.min.js"></SCRIPT>
+		<SCRIPT TYPE="text/javascript" SRC="../node_modules/jquery.inputmask/dist/jquery.inputmask.bundle.js"></SCRIPT>
+		<SCRIPT TYPE="text/javascript" SRC="js/app.js"></SCRIPT>
+
+
+	</head>
+
+	 <body>
+
+    <div class="navbar navbar-inverse  navbar-static-top col-xs-12">
+      <div class="container">
+        <div class="navbar-header">
+          <span class="navbar-brand">
+            Network Config Tool
+          </span>
+        </div>
+
+        <ul class="nav navbar-nav">
+
+              <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configs <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a onclick='$("#includedContent").load("cisco1.html") '>Cisco 1</a></li>
+                  <li><a onclick='$("#includedContent").load("cisco2.html") '>Cisco 2</a></li>
+                  <li><a onclick='$("#includedContent").load("cisco3.html") '>Cisco 3</a></li>
+                </ul>
+              </li>
+
+             <!-- <li><a href='/configs/'>Configs</a></li>-->
+        </ul>
+      </div>
+
+      <div>
+
+      </div>
+    </div>
+
+    <div id='content'>
+      <div class="container col-xs-12">
+        <div class="pull-left col-xs-6">
+
+          <form id='cisco1Config' class="form-horizontal" action='javascript:generate()'>
+            <div class="form-group">
+              <label for="address1" class="col-sm-4 control-label">IP Address 1</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control input-sm ip-address" id="address1" name='address1' placeholder="000.000.000.000" maxlength="16" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="address2" class="col-sm-4 control-label">IP Address 2</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control input-sm ip-address" id="address2" name='address2' placeholder="000.000.000.000" maxlength="16">
+              </div>
+            </div>
+
+            <!-- CHECKBOX
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> Remember me
+                  </label>
+                </div>
+              </div>
+            </div>
+            -->
+
+            <!-- DROPDOWN
+            <div class="form-group">
+              <label for="disabledSelect">Disabled select menu</label>
+              <select id="disabledSelect" class="form-control">
+                <option>Disabled select</option>
+              </select>
+            </div>
+            -->
+
+            <!-- RADIO
+              <div class="radio">
+                <label>
+                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                  Option one is this and that&mdash;be sure to include why it's great
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                  Option two can be something else and selecting it will deselect option one
+                </label>
+              </div>
+            -->
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">Generate</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+        <div class="pull-left col-xs-6">
+          <samp id='output'> </samp>
+        </div>
+      </div>
+    </div>
+
+	</body>
+</html>
