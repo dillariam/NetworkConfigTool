@@ -11,7 +11,7 @@ app.on('ready', function() {
         height: 600,
         width: 1240,
         icon:  __dirname + '/app/img/toolkit.png',
-        //frame: false,
+        frame: false,
     });
 
     mainWindow.loadURL('file://' + __dirname + '/app/index.html');

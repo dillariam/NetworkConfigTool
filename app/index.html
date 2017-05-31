@@ -8,7 +8,7 @@
 
 		<!--Styles-->
 		<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-		<!--<link href="dist/css/main.css" rel="stylesheet">-->
+		<link href="css/main.css" rel="stylesheet">
 
 		<!--Scripts-->
 		<SCRIPT> window.jQuery = window.$ = require('jquery');</SCRIPT>
@@ -21,7 +21,7 @@
 
 	 <body>
 
-    <div class="navbar navbar-inverse  navbar-static-top col-xs-12">
+    <div class="navbar navbar-inverse navbar-static-top col-xs-12 draggable">
       <div class="container">
         <div class="navbar-header">
           <span class="navbar-brand">
@@ -40,12 +40,23 @@
                 </ul>
               </li>
 
+							<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Alter Configs <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a onclick='#'>Add Config</a></li>
+                  <li><a onclick='#'>Modify Config</a></li>
+                  <li><a onclick='#'>Delete Config</a></li>
+                </ul>
+              </li>
+
              <!-- <li><a href='/configs/'>Configs</a></li>-->
         </ul>
-      </div>
 
-      <div>
-
+				<div class='pull-right'>
+					<a class="navbar-brand" role="button" onclick="window.close()">
+						Close(x)
+					</a>
+				</div>
       </div>
     </div>
 
@@ -68,26 +79,26 @@
               </div>
             </div>
 
-            <!-- CHECKBOX
             <div class="form-group">
+              <label for="random_select" class="control-label col-sm-4 " >Select menu</label>
+								<div class='col-sm-3'>
+								  <select id="random_select" class="form-control input-sm">
+			              <option>Option 1</option>
+			              <option>Option 2</option>
+			            </select>
+								</div>
+            </div>
+
+						<div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox"> Remember me
+                    <input type="checkbox" id="random_setting"> Random Setting
                   </label>
                 </div>
               </div>
             </div>
-            -->
 
-            <!-- DROPDOWN
-            <div class="form-group">
-              <label for="disabledSelect">Disabled select menu</label>
-              <select id="disabledSelect" class="form-control">
-                <option>Disabled select</option>
-              </select>
-            </div>
-            -->
 
             <!-- RADIO
               <div class="radio">

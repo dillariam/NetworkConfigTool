@@ -1,0 +1,1 @@
+{{ip}} config -rm -xs -r {{ip1}} {{iff vs}}
