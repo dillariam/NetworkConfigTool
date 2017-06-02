@@ -1,0 +1,94 @@
+<script id="vss-template" type="text/x-handlebars-template">
+  <pre>
+    !******************************
+    !*  Script to convert pair    *
+    !*  of 4500X switches to VSS  *
+    !******************************
+
+
+    !*******************
+    !*  PRIMARY 4500X  *
+    !*******************
+    !
+    switch virtual domain 4
+     switch 1
+     switch 1 priority 110
+     mac-address use-virtual
+    !
+
+    {{#each interfaces}}
+    !
+    int {{name}}
+     description VSL link #{{counter @index}}
+     switchport
+     switchport mode trunk
+     channel-group 1 mode on
+     no shut
+    {{/each}}
+
+     !
+     int Port-Channel1
+      desc VSL Channel
+      switchport
+      switchport mode trunk
+      switch virtual link 1
+      no shut
+     !
+     end
+
+     !*********************
+     !*  SECONDARY Switch *
+     !*********************
+     hostname VSS-DIST-01
+     !
+     switch virtual domain 4
+      switch 2
+      switch 2 priority 105
+      mac-address use-virtual
+
+    {{#each interfaces}}
+    !
+    int {{name}}
+     description VSL link #{{counter @index}}
+     switchport
+     switchport mode trunk
+     channel-group  mode on
+     no shut
+    {{/each}}
+    !
+    int Port-Channel2
+     desc VSL Channel
+     switchport
+     switchport mode trunk
+     switch virtual link 2
+     no shut
+    !
+    end
+
+    !****************************************
+    !*  Convert to VSS                      *
+    !*  NOTE:  Switch reboot is required    *
+    !*         for both Switches            *
+    !****************************************
+    switch convert mode virtual
+
+    !*************************************
+    !*  Bring up Fast-Hello links        *
+    !*  Establish dual-active detection  *
+    !*  after VSS is on-line             *
+    !*************************************
+    switch virtual domain 4
+     dual-active detection fast-hello
+     no dual-active detection pagp
+    {{#each dadinterfaces}}
+    !
+    int {{name}}
+     description VSS Fast Hello
+     dual-active fast-hello
+     no shut
+    {{/each}}
+    !
+    end
+
+  </pre>
+</script>
