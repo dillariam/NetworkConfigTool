@@ -2,66 +2,96 @@
   <pre>
     !******************************
     !*  Script to convert pair    *
-    !*  of 4500X switches to VSS  *
+    !*  of 4500 switches to VSS   *
     !******************************
-
-
     !*******************
-    !*  PRIMARY 4500X  *
+    !*  PRIMARY Switch *
     !*******************
     !
-    switch virtual domain 4
+    !********************************
+    !* Configure Virtual Domain:    *
+    !* Ensure the number is unique  *
+    !* if there are multiple VSS    *
+    !* switch pairs connected       *
+    !********************************
+    !
+    switch virtual domain 1
      switch 1
      switch 1 priority 110
      mac-address use-virtual
     !
-
+    !
+    !************************
+    !* Configure physical   *
+    !* VSL Links - Switch 1 *
+    !************************
+    !
     {{#each interfaces}}
     !
-    int {{name}}
+    interface  {{name}}
      description VSL link #{{counter @index}}
      switchport
      switchport mode trunk
      channel-group 1 mode on
-     no shut
+     no shutdown
     {{/each}}
+    !
+    !****************************
+    !* Configure Port-Channel   *
+    !* VSL Link - Switch 1      *
+    !****************************
+    !
+    interface Port-Channel1
+     description VSL Port-Channel
+     switchport
+     switchport mode trunk
+     switch virtual link 1
+     no shutdown
+    !
+    end
 
-     !
-     int Port-Channel1
-      desc VSL Channel
-      switchport
-      switchport mode trunk
-      switch virtual link 1
-      no shut
-     !
-     end
-
-     !*********************
-     !*  SECONDARY Switch *
-     !*********************
-     hostname VSS-DIST-01
-     !
-     switch virtual domain 4
-      switch 2
-      switch 2 priority 105
-      mac-address use-virtual
-
+    !*********************
+    !*  SECONDARY Switch *
+    !*********************
+    !
+    !********************************
+    !* Configure Virtual Domain     *
+    !* Ensure the number is unique  *
+    !* if there are multiple VSS    *
+    !* switch pairs connected       *
+    !********************************
+    !
+    switch virtual domain 1
+     switch 2
+     switch 2 priority 105
+     mac-address use-virtual
+    !
+    !************************
+    !* Configure physical   *
+    !* VSL Links - Switch 2 *
+    !************************
+    !
     {{#each interfaces}}
     !
-    int {{name}}
+    interface  {{name}}
      description VSL link #{{counter @index}}
      switchport
      switchport mode trunk
-     channel-group  mode on
-     no shut
+     channel-group 1 mode on
+     no shutdown
     {{/each}}
     !
-    int Port-Channel2
-     desc VSL Channel
+    !****************************
+    !* Configure Port-Channel   *
+    !* VSL Link - Switch 1      *
+    !****************************
+    !
+    interface Port-Channel1
+     description VSL Port-Channel
      switchport
      switchport mode trunk
      switch virtual link 2
-     no shut
+     no shutdown
     !
     end
 
@@ -71,29 +101,35 @@
     !*         for both Switches            *
     !****************************************
     switch convert mode virtual
-
+    !
+    !************************
+    !* Reboot the switches  *
+    !************************
+    !
     {{#if_not_empty dadinterfaces }}
     !*************************************
     !*  Bring up Fast-Hello links        *
     !*  Establish dual-active detection  *
     !*  after VSS is on-line             *
     !*************************************
-    switch virtual domain 4
+    switch virtual domain 1
      dual-active detection fast-hello
      no dual-active detection pagp
     {{#each dadinterfaces}}
     !
-    int {{name}}
+    interface {{name}}
      description VSS Fast Hello
      dual-active fast-hello
-     no shut
+     no shutdown
     {{/each}}
     !
     end
     {{else}}
-    !*************************************
-    !*  No DAD interfaces configured  *
-    !*************************************
+    !************************************
+    !* No Dual Active Detection (DAD)   *
+    !* Links configured.  These are     *
+    !* recommended if possible.         *
+    !************************************
     {{/if_not_empty}}
 
   </pre>
