@@ -72,6 +72,7 @@
     !****************************************
     switch convert mode virtual
 
+    {{#if_not_empty dadinterfaces }}
     !*************************************
     !*  Bring up Fast-Hello links        *
     !*  Establish dual-active detection  *
@@ -89,6 +90,7 @@
     {{/each}}
     !
     end
+    {{/if_not_empty}}
 
   </pre>
 </script>

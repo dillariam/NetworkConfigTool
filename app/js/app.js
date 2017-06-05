@@ -68,10 +68,20 @@ $(document).ready(function(){
   $(".ip-address").inputmask("999.999.999.999");
 });
 
+//Adds 1 to a handlebars loop with {{counter @index}}
 Handlebars.registerHelper("counter", function (index){
     return index + 1;
 });
 
+Handlebars.registerHelper("if_not_empty", function (a, opts){
+  if (a[0]  == undefined) {
+      return opts.inverse(this);
+  } else {
+      return opts.fn(this);
+  }
+});
+
+//Add input elements
 function addElement(element){
 
   var source   = $("#" + element +  "-template").html();
