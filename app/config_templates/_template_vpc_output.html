@@ -1,0 +1,132 @@
+<script id="vpc-template" type="text/x-handlebars-template">
+<pre>
+!
+!***************************************
+!* Configuration template for creating *
+!* vPC on Nexus switches               *
+!***************************************
+!
+!****************************
+!* Configure Primary switch *
+!****************************
+!
+!***************************
+!* Turn on the vPC feature *
+!***************************
+!
+feature vpc
+!
+!*********************************
+!* Create vPC Peer keepalive VRF *
+!*********************************
+!
+vrf context vpc_keepalive
+!
+!*********************************
+!* Configure Keepalive interface *
+!*********************************
+!
+inteface {{vpc-peer-keepalive}}
+ no switchport
+ vrf member vpc_keepalive
+ ip address {{own-ip-address}}/{{cidr}}
+ no shutdown
+!
+!*****************************************
+!* Configure the vPC Domain. Ensure      *
+!* this number is unique when connecting *
+!* multiple vPC switches.                *
+!*****************************************
+!
+vpc domain 10
+ role priority 4096
+ peer-keepalive destination {{peer-ip-address}} source {{own-ip-address}} vrf vpc_keepalive
+ peer-gateway
+ peer-switch
+ ip arp synchronize
+!
+!******************************************
+!* Configure the vPC Peer Link interfaces *
+!******************************************
+!
+interface {{vpc-interface1}},{{vpc-interface2}}
+ description vPC Peer Link
+ switchport
+ switchport mode trunk
+ spanning-tree port type network
+ channel-group 1 mode active
+ no shutdown
+!
+inteface port-channel1
+ description vPC Peer Link
+ switchport
+ switchport mode trunk
+ spanning-tree port type network
+ vpc peer-link
+ no shutdown
+!
+!
+!
+!******************************
+!* Configure Secondary switch *
+!******************************
+!
+!***************************
+!* Turn on the vPC feature *
+!***************************
+!
+feature vpc
+!
+!*********************************
+!* Create vPC Peer keepalive VRF *
+!*********************************
+!
+vrf context vpc_keepalive
+!
+!*********************************
+!* Configure Keepalive interface *
+!*********************************
+!
+inteface {{vpc-peer-keepalive}}
+ no switchport
+ vrf member vpc_keepalive
+ ip address {{own-ip-address}}/{{cidr}}
+ no shutdown
+!
+!*****************************************
+!* Configure the vPC Domain. Ensure      *
+!* this number is unique when connecting *
+!* multiple vPC switches.                *
+!*****************************************
+!
+vpc domain 10
+ role priority 8192
+ peer-keepalive destination {{peer-ip-address}} source {{own-ip-address}} vrf vpc_keepalive
+ peer-gateway
+ peer-switch
+ ip arp synchronize
+!
+!******************************************
+!* Configure the vPC Peer Link interfaces *
+!******************************************
+!
+interface {{vpc-interface1}},{{vpc-interface2}}
+ description vPC Peer Link
+ switchport
+ switchport mode trunk
+ spanning-tree port type network
+ channel-group 1 mode active
+ no shutdown
+!
+inteface port-channel1
+ description vPC Peer Link
+ switchport
+ switchport mode trunk
+ spanning-tree port type network
+ vpc peer-link
+ no shutdown
+!
+!
+!
+</pre>
+</script>

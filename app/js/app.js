@@ -1,6 +1,6 @@
 function generate(name){
 
-  var json = {interfaces:{}, dadinterfaces:{}};
+  var json = {interfaces:{}, dadinterfaces:{}, vpcinterface:{}};
 
   //Gets interfaces
   $.each( $('.interfaces'), function(index, value){
@@ -16,14 +16,20 @@ function generate(name){
    }
   });
 
-  /*USE THIS IF WE JUST DO STATIC FIELDS
-  var data = $("form").serializeArray();
+  //Gets vpc-interfaces
+  $.each( $('.vpc-interfaces'), function(index, value){
+    if($(value).val() != ''){
+     json.vpcinterface[index] = {name: $(value).val()};
+   }
+  });
 
+  //Will add extra fields to json that don't have a skip class
+  var data = $("form input:not(.skip)").serializeArray();
   //Turns array into json for template
   $.each( data, function ( index, val ) {
     json[ val.name ] = val.value;
   });
-  */
+
 
   /*Displays Handlebars Template*/
   var source = $("#" + name + "-template").html();
@@ -55,6 +61,7 @@ $(document).ready(function(){
     addElement('interfaces');
   });
 
+  //Adds another dad interface
   $(document.body).on('click', 'span.add-dad-interfaces', function(){
     addElement('dad-interfaces');
   });

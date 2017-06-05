@@ -1,0 +1,51 @@
+<form id='vssConfig' class="form-horizontal" action='javascript:generate("vpc")'>
+
+  <div class="form-group">
+    <label for="vpc-interface1" class="col-sm-4 control-label">vPC Interface 1</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control input-sm vpc-interfaces" name='vpc-interface1' >
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="vpc-interface2" class="col-sm-4 control-label">vPC Interface 2</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control input-sm vpc-interfaces" name='vpc-interface2' >
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="vpc-peer-keepalive" class="col-sm-4 control-label">vPC Peer Keepalive </label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control input-sm vpc-peer-keepalive" name='vpc-peer-keepalive' >
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="cidr" class="col-sm-4 control-label">CIDR Subnet Mask</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control input-sm cidr" name='cidr' placeholder="30" maxlength="2">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="own-ip-address" class="col-sm-4 control-label">Own IP </label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control input-sm ip-address" name='own-ip-address' placeholder="255.255.255.255">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="peer-ip-address" class="col-sm-4 control-label">Peer IP </label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control input-sm ip-address" name='peer-ip-address' placeholder="255.255.255.255" >
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Generate</button>
+    </div>
+  </div>
+</form>
