@@ -73,6 +73,7 @@ Handlebars.registerHelper("counter", function (index){
     return index + 1;
 });
 
+//Checks to see if object is empty
 Handlebars.registerHelper("if_not_empty", function (a, opts){
   if (a[0]  == undefined) {
       return opts.inverse(this);
