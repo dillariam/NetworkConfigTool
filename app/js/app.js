@@ -23,8 +23,20 @@ function generate(name){
    }
   });
 
+  $.each( $('.cidr'), function(index, value){
+    var Netmask = require('netmask').Netmask;
+    if($(value).val() != ''){
+     var block = new Netmask($(value).val());
+     json['first-ip'] = block.first;
+     json['last-ip'] = block.last;
+     json['cidr'] = block.bitmask;
+   }
+  });
+
+
   //Will add extra fields to json that don't have a skip class
   var data = $("form input:not(.skip)").serializeArray();
+
   //Turns array into json for template
   $.each( data, function ( index, val ) {
     json[ val.name ] = val.value;

@@ -29,7 +29,7 @@ vrf context vpc_keepalive
 inteface {{vpc-peer-keepalive}}
  no switchport
  vrf member vpc_keepalive
- ip address {{own-ip-address}}/{{cidr}}
+ ip address {{first-ip}}/{{cidr}}
  no shutdown
 !
 !*****************************************
@@ -40,7 +40,7 @@ inteface {{vpc-peer-keepalive}}
 !
 vpc domain 10
  role priority 4096
- peer-keepalive destination {{peer-ip-address}} source {{own-ip-address}} vrf vpc_keepalive
+ peer-keepalive destination {{last-ip}} source {{first-ip}} vrf vpc_keepalive
  peer-gateway
  peer-switch
  ip arp synchronize
@@ -90,7 +90,7 @@ vrf context vpc_keepalive
 inteface {{vpc-peer-keepalive}}
  no switchport
  vrf member vpc_keepalive
- ip address {{own-ip-address}}/{{cidr}}
+ ip address {{last-ip}}/{{cidr}}
  no shutdown
 !
 !*****************************************
@@ -101,7 +101,7 @@ inteface {{vpc-peer-keepalive}}
 !
 vpc domain 10
  role priority 8192
- peer-keepalive destination {{peer-ip-address}} source {{own-ip-address}} vrf vpc_keepalive
+ peer-keepalive destination {{first-ip}} source {{last-ip}} vrf vpc_keepalive
  peer-gateway
  peer-switch
  ip arp synchronize
