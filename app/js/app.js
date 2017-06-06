@@ -1,6 +1,6 @@
 function generate(name){
 
-  var json = {interfaces:{}, dadinterfaces:{}, vpcinterface:{}};
+  var json = {interfaces:{}, dadinterfaces:{}, vpcinterfaces:{}};
 
   //Gets interfaces
   $.each( $('.interfaces'), function(index, value){
@@ -19,7 +19,7 @@ function generate(name){
   //Gets vpc-interfaces
   $.each( $('.vpc-interfaces'), function(index, value){
     if($(value).val() != ''){
-     json.vpcinterface[index] = {name: $(value).val()};
+     json.vpcinterfaces[index] = {name: $(value).val()};
    }
   });
 
@@ -57,8 +57,9 @@ function loadConfig(name){
   //Loads a config based of name
   $("#form-container").load("templates/_template_" + name + "_input.html");
   $("#included").load("config_templates/_template_" + name + "_output.html");
-  $("#included-interfaces").load("templates/_template_interfaces.html");
-  $("#included-dad-interfaces").load("templates/_template_dad_interfaces.html");
+  $("#included-interfaces").load("templates/partials/_template_interfaces.html");
+  $("#included-dad-interfaces").load("templates/partials/_template_dad_interfaces.html");
+  $("#included-vpc-interfaces").load("templates/partials/_template_vpc_interfaces.html");
   $("#title").html(name.toUpperCase() + " Config");
 
 }
@@ -76,6 +77,11 @@ $(document).ready(function(){
   //Adds another dad interface
   $(document.body).on('click', 'span.add-dad-interfaces', function(){
     addElement('dad-interfaces');
+  });
+
+  //Adds another vpc interface
+  $(document.body).on('click', 'span.add-vpc-interfaces', function(){
+    addElement('vpc-interfaces');
   });
 
   //Removes parent element

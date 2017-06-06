@@ -1,28 +1,27 @@
-<form id='vssConfig' class="form-horizontal" action='javascript:generate("vpc")'>
+<form id='vpcConfig' class="form-horizontal" action='javascript:generate("vpc")'>
 
   <div class="form-group">
-    <label for="vpc-interface1" class="col-sm-4 control-label">vPC Interface 1</label>
+    <label for="vpc" class="col-sm-4 control-label">vPC Interface</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control input-sm vpc-interfaces" name='vpc-interface1' >
+      <input type="text" class="form-control input-sm vpc-interfaces skip" name='vpc[]' placeholder="eth1/1">
+    </div>
+    <span class="glyphicon glyphicon-plus btn btn-primary btn-sm add-vpc-interfaces" aria-hidden="true" title='Add vPC Interfaces'></span>
+  </div>
+
+  <div id='additional-vpc-interfaces'>
+
+  </div>
+
+
+  <div class="form-group">
+    <label for="vpc-peer-keepalive" class="col-sm-4 control-label">vPC Peer Keepalive</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control input-sm vpc-peer-keepalive" name='vpc-peer-keepalive' placeholder="eth1/1">
     </div>
   </div>
 
   <div class="form-group">
-    <label for="vpc-interface2" class="col-sm-4 control-label">vPC Interface 2</label>
-    <div class="col-sm-3">
-      <input type="text" class="form-control input-sm vpc-interfaces" name='vpc-interface2' >
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="vpc-peer-keepalive" class="col-sm-4 control-label">vPC Peer Keepalive </label>
-    <div class="col-sm-3">
-      <input type="text" class="form-control input-sm vpc-peer-keepalive" name='vpc-peer-keepalive' >
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="cidr" class="col-sm-4 control-label">CIDR Subnet Mask</label>
+    <label for="cidr" class="col-sm-4 control-label">Peer Keepalive Subnet</label>
     <div class="col-sm-3">
       <input type="text" class="form-control input-sm skip cidr" name='cidr' placeholder="192.168.10.0/30">
     </div>
@@ -33,4 +32,6 @@
       <button type="submit" class="btn btn-primary">Generate</button>
     </div>
   </div>
+
+
 </form>

@@ -49,7 +49,7 @@ vpc domain 10
 !* Configure the vPC Peer Link interfaces *
 !******************************************
 !
-interface {{vpc-interface1}},{{vpc-interface2}}
+interface {{#each vpcinterfaces}}{{#if @last}}{{name}}{{else}}{{name}}, {{/if}}{{/each}}
  description vPC Peer Link
  switchport
  switchport mode trunk
@@ -110,7 +110,7 @@ vpc domain 10
 !* Configure the vPC Peer Link interfaces *
 !******************************************
 !
-interface {{vpc-interface1}},{{vpc-interface2}}
+interface {{#each vpcinterfaces}}{{#if @last}}{{name}}{{else}}{{name}}, {{/if}}{{/each}}
  description vPC Peer Link
  switchport
  switchport mode trunk
