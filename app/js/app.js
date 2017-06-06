@@ -23,6 +23,7 @@ function generate(name){
    }
   });
 
+  //Takes anything with a cidr class and gets the first and last available ip
   $.each( $('.cidr'), function(index, value){
     var Netmask = require('netmask').Netmask;
     if($(value).val() != ''){
