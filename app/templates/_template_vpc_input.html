@@ -3,7 +3,8 @@
   <div class="form-group">
     <label for="vpc" class="col-sm-4 control-label">vPC Interface</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control input-sm vpc-interfaces skip" name='vpc[]' placeholder="eth1/1">
+      <input type="text" class="form-control input-sm vpc-interfaces skip required" name='vpc[]' placeholder="eth1/1">
+      <div class="help-block with-errors"></div>
     </div>
     <span class="glyphicon glyphicon-plus btn btn-primary btn-sm add-vpc-interfaces" aria-hidden="true" title='Add vPC Interfaces'></span>
   </div>
@@ -16,14 +17,16 @@
   <div class="form-group">
     <label for="vpc-peer-keepalive" class="col-sm-4 control-label">vPC Peer Keepalive</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control input-sm vpc-peer-keepalive" name='vpc-peer-keepalive' placeholder="eth1/1">
+      <input type="text" class="form-control input-sm vpc-peer-keepalive required" name='vpc-peer-keepalive' placeholder="eth1/1">
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
   <div class="form-group">
     <label for="cidr" class="col-sm-4 control-label">Peer Keepalive Subnet</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control input-sm skip cidr" name='cidr' placeholder="192.168.10.0/30">
+      <input type="text" class="form-control input-sm skip cidr required" name='cidr' placeholder="192.168.10.0/30">
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 

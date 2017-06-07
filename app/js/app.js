@@ -1,5 +1,8 @@
 function generate(name){
 
+  //Calls for form validation before generation kicks off
+  validate();
+
   var json = {interfaces:{}, dadinterfaces:{}, vpcinterfaces:{}};
 
   //Gets interfaces
@@ -90,8 +93,6 @@ $(document).ready(function(){
     $(this).parent().remove();
   });
 
-  //Does IP input masks
-  $(".ip-address").inputmask("999.999.999.999");
 });
 
 //Adds 1 to a handlebars loop with {{counter @index}}
@@ -107,6 +108,27 @@ Handlebars.registerHelper("if_not_empty", function (a, opts){
       return opts.fn(this);
   }
 });
+
+//Checks required class and shows error and stops function from running
+function validate(){
+  $.each( $('.required'), function(index, value){
+    if($(value).val() == ''){
+      $(this).closest('.form-group').addClass('has-error');
+      $(this).closest('.form-group').addClass('has-feedback');
+      $(this).next('.help-block').text('This field needs to be filled out!');
+    }else{
+      $(this).closest('.form-group').removeClass('has-error');
+      $(this).closest('.form-group').removeClass('has-feedback');
+      $(this).next('.help-block').text('');
+    }
+  });
+
+  $.each( $('.required'), function(index, value){
+    if($(value).val() == ''){
+      throw new Error("Stopping generation!");
+    }
+  });
+}
 
 //Add input elements
 function addElement(element){
