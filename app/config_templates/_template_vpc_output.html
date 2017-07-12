@@ -15,6 +15,7 @@
 !***************************
 !
 feature vpc
+feature lacp
 !
 !*********************************
 !* Create vPC Peer keepalive VRF *
@@ -26,7 +27,7 @@ vrf context vpc_keepalive
 !* Configure Keepalive interface *
 !*********************************
 !
-inteface {{vpc-peer-keepalive}}
+interface {{vpc-peer-keepalive}}
  no switchport
  vrf member vpc_keepalive
  ip address {{first-ip}}/{{cidr}}
@@ -57,7 +58,7 @@ interface {{#each vpcinterfaces}}{{#if @last}}{{name}}{{else}}{{name}}, {{/if}}{
  channel-group 1 mode active
  no shutdown
 !
-inteface port-channel1
+interface port-channel1
  description vPC Peer Link
  switchport
  switchport mode trunk
@@ -76,6 +77,7 @@ inteface port-channel1
 !***************************
 !
 feature vpc
+feature lacp
 !
 !*********************************
 !* Create vPC Peer keepalive VRF *
@@ -87,7 +89,7 @@ vrf context vpc_keepalive
 !* Configure Keepalive interface *
 !*********************************
 !
-inteface {{vpc-peer-keepalive}}
+interface {{vpc-peer-keepalive}}
  no switchport
  vrf member vpc_keepalive
  ip address {{last-ip}}/{{cidr}}
@@ -118,7 +120,7 @@ interface {{#each vpcinterfaces}}{{#if @last}}{{name}}{{else}}{{name}}, {{/if}}{
  channel-group 1 mode active
  no shutdown
 !
-inteface port-channel1
+interface port-channel1
  description vPC Peer Link
  switchport
  switchport mode trunk
